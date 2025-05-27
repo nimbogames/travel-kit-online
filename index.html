@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Railway Emergency Kit</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#111827" />
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    header, footer {
+      background: #2c3e50;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+    main {
+      padding: 1rem;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background: #34495e;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    nav a {
+      color: white;
+      padding: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: #1abc9c;
+    }
+    .page {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+    .active {
+      display: block;
+    }
+    .dark {
+      background: #1e1e2f;
+      color: #e0e0e0;
+    }
+    .dark header,
+    .dark footer,
+    .dark nav {
+      background: #111827;
+    }
+    .dark nav a {
+      color: #e0e0e0;
+    }
+    .dark nav a:hover {
+      background: #2563eb;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      padding: 0.6rem 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-size: 1rem;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    ul li {
+      margin: 0.5rem 0;
+    }
+    h2::before {
+      content: "\f02e";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      margin-right: 0.5rem;
+      color: #2980b9;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    input[type="text"], input[type="password"] {
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      width: 100%;
+      max-width: 300px;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-train"></i> Railway Emergency Kit</h1>
+  </header>
+
+  <nav>
+    <a href="#" onclick="showPage('contacts')"><i class="fas fa-phone"></i> Contacts</a>
+    <a href="#" onclick="showPage('food')"><i class="fas fa-utensils"></i> Food</a>
+    <a href="#" onclick="showPage('alerts')"><i class="fas fa-exclamation-triangle"></i> Alerts</a>
+    <a href="#" onclick="showPage('maps')"><i class="fas fa-map"></i> Maps</a>
+    <a href="#" onclick="showPage('tips')"><i class="fas fa-lightbulb"></i> Tips</a>
+    <a href="#" onclick="showPage('settings')"><i class="fas fa-cogs"></i> Settings</a>
+    <a href="#" onclick="showPage('admin')"><i class="fas fa-lock"></i> Admin</a>
+  </nav>
+
+  <main>
+    <div id="contacts" class="page active">
+      <h2>Emergency Contacts</h2>
+      <ul>
+        <li><strong>Railway Helpline:</strong> 139</li>
+        <li><strong>Women’s Helpline:</strong> 182</li>
+        <li><strong>Security (RPF):</strong> 1800-111-322</li>
+        <li><strong>Twitter:</strong> @RailMinIndia</li>
+        <li><strong>Twitter:</strong> @IRCTCofficial</li>
+      </ul>
+    </div>
+
+    <div id="food" class="page">
+      <h2>IRCTC Food & Drink Prices</h2>
+      <ul>
+        <li>Veg Meal: ₹50</li>
+        <li>Non-Veg Meal: ₹80</li>
+        <li>Tea/Coffee: ₹10</li>
+        <li>Water Bottle (1L): ₹15</li>
+        <li>Snacks Pack: ₹20–30</li>
+      </ul>
+    </div>
+
+    <div id="alerts" class="page">
+      <h2>Important Alerts</h2>
+      <ul id="alertList"></ul>
+    </div>
+
+    <div id="maps" class="page">
+      <h2>Station Maps</h2>
+      <p><a href="https://www.google.com/maps/search/indian+railway+stations" target="_blank">Open Live Railway Maps</a></p>
+    </div>
+
+    <div id="tips" class="page">
+      <h2>Emergency Tips</h2>
+      <ul>
+        <li><strong>Stay Calm:</strong> Helps you think clearly.</li>
+        <li><strong>Contact Authorities:</strong> Use 139 or 182 immediately.</li>
+        <li><strong>Keep Essentials Handy:</strong> Carry power bank, ID, cash, water.</li>
+        <li><strong>Be Aware of Exits:</strong> Know the exit paths in advance.</li>
+        <li><strong>Help Others:</strong> Support elderly, women, and children if safe.</li>
+      </ul>
+    </div>
+
+    <div id="settings" class="page">
+      <h2>Settings</h2>
+      <button onclick="toggleDarkMode()"><i class="fas fa-moon"></i> Toggle Fancy Dark Mode</button>
+    </div>
+
+    <div id="admin" class="page">
+      <h2>Admin Panel</h2>
+      <input type="password" id="adminPass" placeholder="Enter password" />
+      <button onclick="authAdmin()">Login</button>
+      <div id="adminArea" style="display:none">
+        <h3>Add New Alert</h3>
+        <input type="text" id="newAlert" placeholder="Alert message" />
+        <button onclick="addAlert()">Add Alert</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Railway Emergency Kit | Built for safety</p>
+  </footer>
+
+  <script>
+    const password = "nimbo123";
+    let alerts = ["No active alerts. Stay safe and report issues via 139 or Twitter."];
+
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      if (id === 'alerts') loadAlerts();
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark");
+    }
+
+    function authAdmin() {
+      const input = document.getElementById("adminPass").value;
+      if (input === password) {
+        document.getElementById("adminArea").style.display = 'block';
+        alert("Logged in!");
+      } else {
+        alert("Wrong password!");
+      }
+    }
+
+    function addAlert() {
+      const val = document.getElementById("newAlert").value;
+      if (val.trim()) {
+        alerts.push(val);
+        document.getElementById("newAlert").value = "";
+        loadAlerts();
+      }
+    }
+
+    function loadAlerts() {
+      const list = document.getElementById("alertList");
+      list.innerHTML = alerts.map(a => `<li>${a}</li>`).join('');
+    }
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => console.log('Service Worker registered', reg))
+          .catch(err => console.log('Service Worker registration failed', err));
+      });
+    }
+
+    loadAlerts();
+  </script>
+</body>
+</html>
